@@ -33,7 +33,8 @@ class _BusinessEditDialogState extends State<_BusinessEditDialog> {
   void initState() {
     super.initState();
     nameController = TextEditingController(text: widget.business.name);
-    descriptionController = TextEditingController(text: widget.business.description);
+    descriptionController =
+        TextEditingController(text: widget.business.description);
   }
 
   @override
@@ -119,8 +120,10 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
 
     try {
       final businesses = await businessService.getUserBusinesses(userId);
-      final remainingOperations = await businessService.getRemainingOperations(userId);
-      final remainingBusinesses = await businessService.getRemainingBusinesses(userId);
+      final remainingOperations =
+          await businessService.getRemainingOperations(userId);
+      final remainingBusinesses =
+          await businessService.getRemainingBusinesses(userId);
 
       setState(() {
         _businesses = businesses;
@@ -137,7 +140,7 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
 
   void _handlePremiumError(String message) {
     if (!mounted) return;
-    
+
     UpgradePremiumSheet.show(
       context,
       message: _l10n.premiumLimitReached,
@@ -162,13 +165,13 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
       await _loadBusinesses();
     } catch (e) {
       if (!mounted) return;
-      
+
       final errorMessage = e.toString();
       setState(() {
         _status = errorMessage;
       });
-      
-      if (errorMessage.toLowerCase().contains('limit') || 
+
+      if (errorMessage.toLowerCase().contains('limit') ||
           errorMessage.toLowerCase().contains('premium')) {
         _handlePremiumError(errorMessage);
       }
@@ -197,7 +200,8 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
         userId: business.userId,
       );
 
-      final updateResult = await businessService.updateBusiness(updatedBusiness);
+      final updateResult =
+          await businessService.updateBusiness(updatedBusiness);
       if (updateResult != null && mounted) {
         setState(() {
           _status = _l10n.updateSuccess;
@@ -206,13 +210,13 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
       }
     } catch (e) {
       if (!mounted) return;
-      
+
       final errorMessage = e.toString();
       setState(() {
         _status = _l10n.updateFailed(errorMessage);
       });
-      
-      if (errorMessage.toLowerCase().contains('limit') || 
+
+      if (errorMessage.toLowerCase().contains('limit') ||
           errorMessage.toLowerCase().contains('premium')) {
         _handlePremiumError(errorMessage);
       }
@@ -235,13 +239,13 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
       }
     } catch (e) {
       if (!mounted) return;
-      
+
       final errorMessage = e.toString();
       setState(() {
         _status = _l10n.deleteFailed(errorMessage);
       });
-      
-      if (errorMessage.toLowerCase().contains('limit') || 
+
+      if (errorMessage.toLowerCase().contains('limit') ||
           errorMessage.toLowerCase().contains('premium')) {
         _handlePremiumError(errorMessage);
       }
@@ -329,24 +333,24 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
             ),
             const SizedBox(height: 8),
             ..._businesses.map((business) => Card(
-              child: ListTile(
-                title: Text(business.name),
-                subtitle: Text(business.description),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () => _updateBusiness(business),
+                  child: ListTile(
+                    title: Text(business.name),
+                    subtitle: Text(business.description),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () => _updateBusiness(business),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => _deleteBusiness(business.id),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () => _deleteBusiness(business.id),
-                    ),
-                  ],
-                ),
-              ),
-            )),
+                  ),
+                )),
           ],
         ),
       ),
@@ -360,4 +364,4 @@ class _BusinessTestScreenState extends State<BusinessTestScreen> {
     _userIdController.dispose();
     super.dispose();
   }
-} 
+}

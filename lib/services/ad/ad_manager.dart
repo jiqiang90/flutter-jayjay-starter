@@ -9,7 +9,7 @@ class AdManager {
 
   BannerAd? _bannerAd;
   InterstitialAd? _interstitialAd;
-  
+
   Future<void> initialize() async {
     try {
       await MobileAds.instance.initialize();
@@ -95,4 +95,4 @@ class AdManager {
     _bannerAd?.dispose();
     _interstitialAd?.dispose();
   }
-} 
+}

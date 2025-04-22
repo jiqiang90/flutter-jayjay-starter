@@ -43,4 +43,4 @@ class StorageService {
   Future<void> clear() async {
     await _prefs.clear();
   }
-} 
+}

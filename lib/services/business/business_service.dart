@@ -241,4 +241,4 @@ class BusinessService {
   Future<void> close() async {
     await _database.close();
   }
-} 
+}

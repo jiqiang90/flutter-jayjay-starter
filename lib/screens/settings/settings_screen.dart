@@ -125,7 +125,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('${AppLocalizations.of(context)!.version} ${AppConfig.version}'),
+            Text(
+                '${AppLocalizations.of(context)!.version} ${AppConfig.version}'),
             const SizedBox(height: 16),
             ListTile(
               title: Text(AppLocalizations.of(context)!.checkUpdates),
@@ -237,7 +238,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(AppLocalizations.of(context)!.languageSettings),
             subtitle: Consumer<LanguageService>(
               builder: (context, languageService, _) => Text(
-                LanguageService.languageNames[languageService.currentLanguage] ?? '简体中文',
+                LanguageService
+                        .languageNames[languageService.currentLanguage] ??
+                    '简体中文',
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodySmall?.color,
                 ),
@@ -248,7 +251,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             leading: const Icon(Icons.info),
             title: Text(AppLocalizations.of(context)!.aboutApp),
-            subtitle: Text('${AppLocalizations.of(context)!.version} ${AppConfig.version}'),
+            subtitle: Text(
+                '${AppLocalizations.of(context)!.version} ${AppConfig.version}'),
             onTap: () => _showAboutDialog(context),
           ),
         ],
@@ -261,4 +265,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _loadPremiumStatus();
     });
   }
-} 
+}

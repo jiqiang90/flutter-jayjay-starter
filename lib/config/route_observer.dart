@@ -7,7 +7,7 @@ class AppRouteObserver extends NavigatorObserver {
     super.didPush(route, previousRoute);
     final args = route.settings.arguments as Map<String, dynamic>?;
     final isPremium = args?[AppRoutes.paramIsPremium] ?? false;
-    
+
     // Log route changes
     print('Route pushed: ${route.settings.name} (Premium: $isPremium)');
   }
@@ -23,7 +23,8 @@ class AppRouteObserver extends NavigatorObserver {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
     final args = newRoute?.settings.arguments as Map<String, dynamic>?;
     final isPremium = args?[AppRoutes.paramIsPremium] ?? false;
-    
-    print('Route replaced: ${oldRoute?.settings.name} -> ${newRoute?.settings.name} (Premium: $isPremium)');
+
+    print(
+        'Route replaced: ${oldRoute?.settings.name} -> ${newRoute?.settings.name} (Premium: $isPremium)');
   }
-} 
+}

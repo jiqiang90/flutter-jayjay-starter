@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.profile),
@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
           }
 
           final stats = snapshot.data!;
-          
+
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
@@ -62,7 +62,8 @@ class ProfileScreen extends StatelessWidget {
         leading: const CircleAvatar(
           child: Icon(Icons.person),
         ),
-        title: Text(ServiceFactory.userService.getUserData()?.name ?? l10n.notLoggedIn),
+        title: Text(
+            ServiceFactory.userService.getUserData()?.name ?? l10n.notLoggedIn),
         subtitle: Text(ServiceFactory.userService.getUserData()?.email ?? ''),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
@@ -110,4 +111,4 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-} 
+}

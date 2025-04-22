@@ -36,4 +36,4 @@ class Business {
       'userId': userId,
     };
   }
-} 
+}

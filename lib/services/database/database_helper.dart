@@ -60,4 +60,4 @@ class DatabaseHelper {
       _database = null;
     }
   }
-} 
+}

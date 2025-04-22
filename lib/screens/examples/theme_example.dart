@@ -34,8 +34,10 @@ class _ThemeExampleState extends State<ThemeExample> {
           children: [
             _buildThemeSection('Colors', [
               _buildColorCard('Primary', Theme.of(context).colorScheme.primary),
-              _buildColorCard('Secondary', Theme.of(context).colorScheme.secondary),
-              _buildColorCard('Tertiary', Theme.of(context).colorScheme.tertiary),
+              _buildColorCard(
+                  'Secondary', Theme.of(context).colorScheme.secondary),
+              _buildColorCard(
+                  'Tertiary', Theme.of(context).colorScheme.tertiary),
               _buildColorCard('Error', Theme.of(context).colorScheme.error),
             ]),
             const SizedBox(height: 16),
@@ -116,4 +118,4 @@ class _ThemeExampleState extends State<ThemeExample> {
       ),
     );
   }
-} 
+}

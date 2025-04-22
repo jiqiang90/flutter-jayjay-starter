@@ -31,7 +31,8 @@ class AppButton extends StatelessWidget {
         onPressed: isEnabled && !isLoading ? onPressed : null,
         style: style,
         child: Padding(
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: padding ??
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: isLoading
               ? const SizedBox(
                   width: 20,
@@ -45,4 +46,4 @@ class AppButton extends StatelessWidget {
       ),
     );
   }
-} 
+}

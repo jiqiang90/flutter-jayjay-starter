@@ -138,4 +138,4 @@ class UserData {
     required this.name,
     required this.email,
   });
-} 
+}

@@ -90,4 +90,4 @@ class AppDialog {
       content: message,
     );
   }
-} 
+}

@@ -64,4 +64,4 @@ class _AdBannerState extends State<AdBanner> {
       child: AdWidget(ad: _bannerAd!),
     );
   }
-} 
+}

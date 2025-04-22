@@ -80,4 +80,4 @@ class ServiceFactory {
   static AdManager? get adManager => _instance._adManager;
   static LanguageService get languageService => _instance._languageService;
   static BusinessService get businessService => _instance._businessService!;
-} 
+}

@@ -4,7 +4,7 @@ import 'package:jayjay_starter/widgets/dialogs/app_dialog.dart';
 class ErrorHandler {
   static void handle(BuildContext context, dynamic error) {
     String message = 'An unexpected error occurred';
-    
+
     if (error is String) {
       message = error;
     } else if (error is Exception) {
@@ -72,4 +72,4 @@ class ErrorHandler {
       ),
     );
   }
-} 
+}

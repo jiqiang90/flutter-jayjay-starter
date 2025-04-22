@@ -46,4 +46,4 @@ class AppListTile extends StatelessWidget {
       ),
     );
   }
-} 
+}

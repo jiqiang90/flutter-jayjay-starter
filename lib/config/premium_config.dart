@@ -17,4 +17,4 @@ class PremiumConfig {
   static const double lifetimePrice = 99.99;
 
   static const String premiumStorageKey = 'is_premium';
-} 
+}

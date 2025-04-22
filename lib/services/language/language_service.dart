@@ -4,12 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LanguageService extends ChangeNotifier {
   static const String _languageKey = 'app_language';
   static const String _defaultLanguage = 'en';
-  
+
   late SharedPreferences _prefs;
   String _currentLanguage = _defaultLanguage;
 
   String get currentLanguage => _currentLanguage;
-  
+
   LanguageService() {
     _init();
   }
@@ -32,4 +32,4 @@ class LanguageService extends ChangeNotifier {
     'zh': '简体中文',
     'en': 'English',
   };
-} 
+}

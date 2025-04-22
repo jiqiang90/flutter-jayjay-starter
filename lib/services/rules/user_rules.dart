@@ -98,4 +98,4 @@ class UserRules {
   Future<void> setPremiumExpireDate(String date) async {
     await _storage.setString(_premiumExpireDateKey, date);
   }
-} 
+}

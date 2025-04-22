@@ -114,7 +114,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Stack(
       children: [
         Scaffold(
@@ -313,7 +313,8 @@ class _PricingCard extends StatelessWidget {
             children: [
               if (isPopular)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.amber,
                     borderRadius: BorderRadius.circular(4),
@@ -368,4 +369,4 @@ class _PricingCard extends StatelessWidget {
       ),
     );
   }
-} 
+}

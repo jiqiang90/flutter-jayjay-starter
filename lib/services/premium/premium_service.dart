@@ -10,15 +10,19 @@ class PremiumService {
   PremiumService._internal();
 
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-  final StreamController<List<PurchaseDetails>> _purchaseController = StreamController<List<PurchaseDetails>>.broadcast();
-  Stream<List<PurchaseDetails>> get purchaseStream => _purchaseController.stream;
+  final StreamController<List<PurchaseDetails>> _purchaseController =
+      StreamController<List<PurchaseDetails>>.broadcast();
+  Stream<List<PurchaseDetails>> get purchaseStream =>
+      _purchaseController.stream;
 
   bool _isInitialized = false;
   bool _isPremium = false;
   DateTime? _expireDate;
   List<ProductDetails> _products = [];
 
-  bool get isPremium => _isPremium && (_expireDate == null || _expireDate!.isAfter(DateTime.now()));
+  bool get isPremium =>
+      _isPremium &&
+      (_expireDate == null || _expireDate!.isAfter(DateTime.now()));
   DateTime? get expireDate => _expireDate;
 
   Future<void> initialize() async {
@@ -34,7 +38,8 @@ class PremiumService {
       }
 
       // 设置购买监听
-      final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
+      final Stream<List<PurchaseDetails>> purchaseUpdated =
+          _inAppPurchase.purchaseStream;
       purchaseUpdated.listen((purchases) {
         _handlePurchases(purchases);
         _purchaseController.add(purchases);
@@ -52,7 +57,8 @@ class PremiumService {
 
   Future<void> _loadProducts() async {
     try {
-      final ProductDetailsResponse response = await _inAppPurchase.queryProductDetails({
+      final ProductDetailsResponse response =
+          await _inAppPurchase.queryProductDetails({
         AppConfig.premiumMonthlyId,
         AppConfig.premiumYearlyId,
       });
@@ -70,14 +76,17 @@ class PremiumService {
 
   Future<bool> purchasePremium(String plan) async {
     try {
-      final productId = plan == 'monthly' ? AppConfig.premiumMonthlyId : AppConfig.premiumYearlyId;
+      final productId = plan == 'monthly'
+          ? AppConfig.premiumMonthlyId
+          : AppConfig.premiumYearlyId;
       final product = _products.firstWhere((p) => p.id == productId);
 
       final PurchaseParam purchaseParam = PurchaseParam(
         productDetails: product,
       );
 
-      final bool success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      final bool success =
+          await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       return success;
     } catch (e) {
       debugPrint('Failed to purchase premium: $e');
@@ -105,18 +114,19 @@ class PremiumService {
       // 目前我们只做本地验证
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('is_premium', true);
-      
+
       // 设置过期时间
       final now = DateTime.now();
       final expireDate = purchase.productID == AppConfig.premiumMonthlyId
           ? now.add(const Duration(days: 30))
           : now.add(const Duration(days: 365));
-      
-      await prefs.setInt('premium_expire_date', expireDate.millisecondsSinceEpoch);
-      
+
+      await prefs.setInt(
+          'premium_expire_date', expireDate.millisecondsSinceEpoch);
+
       _isPremium = true;
       _expireDate = expireDate;
-      
+
       debugPrint('Purchase verified successfully');
     } catch (e) {
       debugPrint('Failed to verify purchase: $e');
@@ -135,4 +145,4 @@ class PremiumService {
   void dispose() {
     _purchaseController.close();
   }
-} 
+}

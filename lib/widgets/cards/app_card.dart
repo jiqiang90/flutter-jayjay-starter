@@ -44,4 +44,4 @@ class AppCard extends StatelessWidget {
 
     return card;
   }
-} 
+}
