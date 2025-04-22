@@ -15,7 +15,7 @@ class ServiceFactory {
   factory ServiceFactory() => _instance;
   ServiceFactory._internal();
 
-  // 核心服务
+  // Core services
   late final StorageService storageService;
   late final UserRules _userRules;
   late final UserService _userService;
@@ -23,18 +23,18 @@ class ServiceFactory {
   late final LanguageService _languageService;
   late final DatabaseHelper _databaseHelper;
 
-  // 可选服务
-  PremiumService? _premiumService;
-  AdManager? _adManager;
-  BusinessService? _businessService;
+  // Optional services
+  late final PremiumService _premiumService;
+  late final AdManager? _adManager;
+  late final BusinessService _businessService;
 
   static Future<void> initialize() async {
     try {
-      // 初始化数据库
+      // Initialize database
       _instance._databaseHelper = DatabaseHelper();
       await _instance._databaseHelper.database;
 
-      // 初始化核心服务
+      // Initialize core services
       _instance.storageService = StorageService();
       await _instance.storageService.initialize();
 
@@ -49,10 +49,9 @@ class ServiceFactory {
 
       _instance._languageService = LanguageService();
 
-      // 根据配置初始化可选服务
-      if (AppConfig.enablePremium) {
-        _instance._premiumService = PremiumService();
-        await _instance._premiumService?.initialize();
+      // Initialize optional services based on configuration
+      if (AppConfig.enablePremiumFeatures) {
+        _instance._premiumService = PremiumService(_instance._userRules);
       }
 
       if (AppConfig.enableAds) {
@@ -60,8 +59,8 @@ class ServiceFactory {
         await _instance._adManager?.initialize();
       }
 
-      // 初始化业务服务
-      _instance._businessService = BusinessService();
+      // Initialize business services
+      _instance._businessService = BusinessService(_instance._databaseHelper);
       await _instance._businessService?.initialize();
 
       debugPrint('ServiceFactory initialized successfully');
@@ -71,7 +70,7 @@ class ServiceFactory {
     }
   }
 
-  // 获取服务的辅助方法
+  // Helper method to get services
   static StorageService get storage => _instance.storageService;
   static UserRules get userRules => _instance._userRules;
   static UserService get userService => _instance._userService;

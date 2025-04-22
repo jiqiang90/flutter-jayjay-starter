@@ -14,11 +14,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.home),
         actions: [
-          if (AppConfig.enablePremium)
+          if (AppConfig.enablePremiumFeatures)
             IconButton(
               icon: const Icon(Icons.star),
               onPressed: () {
-                // TODO: 显示高级功能页面
+                // TODO: Show premium features page
               },
             ),
         ],
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 24),
-          if (AppConfig.enablePremium)
+          if (AppConfig.enablePremiumFeatures)
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),

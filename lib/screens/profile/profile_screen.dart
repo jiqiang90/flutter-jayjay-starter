@@ -67,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
         subtitle: Text(ServiceFactory.userService.getUserData()?.email ?? ''),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
-          // TODO: 跳转到用户详情页面
+          // TODO: Navigate to user details page
         },
       ),
     );

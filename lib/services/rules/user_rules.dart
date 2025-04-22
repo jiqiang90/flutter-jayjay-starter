@@ -91,8 +91,8 @@ class UserRules {
 
   static const String _premiumExpireDateKey = 'premium_expire_date';
 
-  Future<String?> getPremiumExpireDate() async {
-    return await _storage.getString(_premiumExpireDateKey);
+  Future<String> getPremiumExpireDate() async {
+    return await _storage.getString(_premiumExpireDateKey) ?? '';
   }
 
   Future<void> setPremiumExpireDate(String date) async {

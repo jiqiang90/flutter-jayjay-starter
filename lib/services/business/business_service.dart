@@ -9,16 +9,20 @@ import 'package:jayjay_starter/l10n/app_localizations.dart';
 
 class BusinessService {
   static final BusinessService _instance = BusinessService._internal();
-  factory BusinessService() => _instance;
+  factory BusinessService(DatabaseHelper databaseHelper) {
+    _instance._databaseHelper = databaseHelper;
+    return _instance;
+  }
   BusinessService._internal();
 
+  late final DatabaseHelper _databaseHelper;
   late final Database _database;
   final int _freeLimit = 3;
   late AppLocalizations l10n;
 
   Future<void> initialize() async {
     try {
-      _database = await DatabaseHelper().database;
+      _database = await _databaseHelper.database;
       await _createTables();
       debugPrint('BusinessService initialized successfully');
     } catch (e) {
@@ -34,12 +38,11 @@ class BusinessService {
   Future<void> _createTables() async {
     await _database.execute('''
       CREATE TABLE IF NOT EXISTS businesses (
-        id TEXT PRIMARY KEY,
-        userId TEXT NOT NULL,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         description TEXT,
-        createdAt TEXT NOT NULL,
-        updatedAt TEXT NOT NULL
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
       )
     ''');
 

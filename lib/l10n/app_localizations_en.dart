@@ -111,15 +111,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get purchaseSuccess => 'Purchase Success';
 
   @override
-  String get purchaseSuccessMessage =>
-      'Thank you for your support! You are now a premium member.';
+  String get purchaseSuccessMessage => 'Thank you for your support! You are now a premium member.';
 
   @override
   String get purchaseFailed => 'Purchase Failed';
 
   @override
-  String get purchaseFailedMessage =>
-      'Failed to complete the purchase. Please try again later.';
+  String get purchaseFailedMessage => 'Failed to complete the purchase. Please try again later.';
 
   @override
   String get businessTest => 'Business Test';
@@ -184,8 +182,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get success => 'Success';
 
   @override
-  String get appDescription =>
-      'This is a sample application that demonstrates how to build a fully functional Flutter application.';
+  String get appDescription => 'This is a sample application that demonstrates how to build a fully functional Flutter application.';
 
   @override
   String get usageLimits => 'Usage Limits';
@@ -233,8 +230,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get upgradeToPremiumTitle => 'Upgrade to Premium';
 
   @override
-  String get upgradeToPremiumDesc =>
-      'Unlock all limits and enjoy unlimited usage';
+  String get upgradeToPremiumDesc => 'Unlock all limits and enjoy unlimited usage';
 
   @override
   String get notLoggedIn => 'Not Logged In';
@@ -297,27 +293,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumLimitReachedTitle => 'Limit Reached';
 
   @override
-  String get premiumLimitReachedDescription =>
-      'You\'ve reached the limit of your free plan. Upgrade to premium to continue.';
+  String get premiumLimitReachedDescription => 'You\'ve reached the limit of your free plan. Upgrade to premium to continue.';
 
   @override
   String get premiumTrialExpiredTitle => 'Trial Expired';
 
   @override
-  String get premiumTrialExpiredDescription =>
-      'Your trial period has expired. Upgrade to premium to continue using all features.';
+  String get premiumTrialExpiredDescription => 'Your trial period has expired. Upgrade to premium to continue using all features.';
 
   @override
-  String get errorOperationLimitReached =>
-      'You\'ve reached the operation limit for free users. Please upgrade to premium.';
+  String get errorOperationLimitReached => 'You\'ve reached the operation limit for free users. Please upgrade to premium.';
 
   @override
-  String get errorBusinessLimitReached =>
-      'You\'ve reached the business limit for free users. Please upgrade to premium.';
+  String get errorBusinessLimitReached => 'You\'ve reached the business limit for free users. Please upgrade to premium.';
 
   @override
-  String get errorPremiumRequired =>
-      'This feature requires premium membership. Please upgrade to continue.';
+  String get errorPremiumRequired => 'This feature requires premium membership. Please upgrade to continue.';
 
   @override
   String errorOperationFailed(String error) {

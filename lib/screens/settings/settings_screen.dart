@@ -90,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  title: const Text('简体中文'),
+                  title: const Text('Simplified Chinese'),
                   trailing: languageService.currentLanguage == 'zh'
                       ? const Icon(Icons.check)
                       : null,
@@ -131,21 +131,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
               title: Text(AppLocalizations.of(context)!.checkUpdates),
               onTap: () {
-                // TODO: 检查更新
+                // TODO: Check for updates
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text(AppLocalizations.of(context)!.privacyPolicy),
               onTap: () {
-                // TODO: 显示隐私政策
+                // TODO: Show privacy policy
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text(AppLocalizations.of(context)!.userAgreement),
               onTap: () {
-                // TODO: 显示用户协议
+                // TODO: Show terms of service
                 Navigator.pop(context);
               },
             ),
@@ -238,9 +238,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(AppLocalizations.of(context)!.languageSettings),
             subtitle: Consumer<LanguageService>(
               builder: (context, languageService, _) => Text(
-                LanguageService
-                        .languageNames[languageService.currentLanguage] ??
-                    '简体中文',
+                'Simplified Chinese',
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodySmall?.color,
                 ),

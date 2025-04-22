@@ -12,6 +12,7 @@ class UserService {
 
   Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
+    await _rules.initialize();
   }
 
   // User data management
@@ -113,10 +114,8 @@ class UserService {
     await _rules.setPremium(value);
   }
 
-  Future<DateTime?> getPremiumExpireDate() async {
-    final dateStr = await _rules.getPremiumExpireDate();
-    if (dateStr == null) return null;
-    return DateTime.parse(dateStr);
+  Future<String> getPremiumExpireDate() async {
+    return await _rules.getPremiumExpireDate();
   }
 
   Future<void> setPremiumExpireDate(DateTime date) async {
@@ -126,7 +125,7 @@ class UserService {
   Future<bool> isPremiumExpired() async {
     final expireDate = await getPremiumExpireDate();
     if (expireDate == null) return true;
-    return DateTime.now().isAfter(expireDate);
+    return DateTime.now().isAfter(DateTime.parse(expireDate));
   }
 }
 

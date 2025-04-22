@@ -3,10 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jayjay_starter/config/app_config.dart';
+import 'package:jayjay_starter/services/rules/user_rules.dart';
 
 class PremiumService {
   static final PremiumService _instance = PremiumService._internal();
-  factory PremiumService() => _instance;
+  factory PremiumService(UserRules userRules) {
+    _instance._userRules = userRules;
+    return _instance;
+  }
   PremiumService._internal();
 
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
@@ -19,25 +23,24 @@ class PremiumService {
   bool _isPremium = false;
   DateTime? _expireDate;
   List<ProductDetails> _products = [];
+  late final UserRules _userRules;
 
-  bool get isPremium =>
-      _isPremium &&
-      (_expireDate == null || _expireDate!.isAfter(DateTime.now()));
+  bool get isPremium => _isPremium;
+
   DateTime? get expireDate => _expireDate;
 
   Future<void> initialize() async {
     if (_isInitialized) return;
 
     try {
-      // 初始化购买状态
-      final prefs = await SharedPreferences.getInstance();
-      _isPremium = prefs.getBool('is_premium') ?? false;
-      final expireTimestamp = prefs.getInt('premium_expire_date');
-      if (expireTimestamp != null) {
-        _expireDate = DateTime.fromMillisecondsSinceEpoch(expireTimestamp);
+      // Initialize purchase state
+      _isPremium = await _userRules.isPremium();
+      final expireDateStr = await _userRules.getPremiumExpireDate();
+      if (expireDateStr.isNotEmpty) {
+        _expireDate = DateTime.parse(expireDateStr);
       }
 
-      // 设置购买监听
+      // Set up purchase listener
       final Stream<List<PurchaseDetails>> purchaseUpdated =
           _inAppPurchase.purchaseStream;
       purchaseUpdated.listen((purchases) {
@@ -45,7 +48,7 @@ class PremiumService {
         _purchaseController.add(purchases);
       });
 
-      // 加载商品
+      // Load products
       await _loadProducts();
 
       _isInitialized = true;
@@ -110,19 +113,17 @@ class PremiumService {
 
   Future<void> _verifyPurchase(PurchaseDetails purchase) async {
     try {
-      // TODO: 在这里添加服务器验证逻辑
-      // 目前我们只做本地验证
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('is_premium', true);
+      // TODO: Add server verification logic here
+      // Currently we only do local verification
+      await _userRules.setPremium(true);
 
-      // 设置过期时间
+      // Set expiration date
       final now = DateTime.now();
       final expireDate = purchase.productID == AppConfig.premiumMonthlyId
           ? now.add(const Duration(days: 30))
           : now.add(const Duration(days: 365));
 
-      await prefs.setInt(
-          'premium_expire_date', expireDate.millisecondsSinceEpoch);
+      await _userRules.setPremiumExpireDate(expireDate.toIso8601String());
 
       _isPremium = true;
       _expireDate = expireDate;

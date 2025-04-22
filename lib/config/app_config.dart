@@ -1,13 +1,13 @@
 class AppConfig {
   // Feature flags
-  static const bool enablePremium =
+  static const bool enablePremiumFeatures =
       bool.fromEnvironment('ENABLE_PREMIUM', defaultValue: true);
   static const bool enableAds =
       bool.fromEnvironment('ENABLE_ADS', defaultValue: true);
   static const bool enableInAppPurchase = true;
 
   // App info
-  static const String appName = 'JayJay Starter';
+  static const String appName = 'JayJay';
   static const String version = '1.0.0';
   static const bool isDebug = bool.fromEnvironment('dart.vm.product') == false;
 
@@ -59,4 +59,8 @@ class AppConfig {
   // 应用内购买商品 ID
   static const String premiumMonthlyId = 'com.jayjay.premium.monthly';
   static const String premiumYearlyId = 'com.jayjay.premium.yearly';
+
+  // App configuration
+  static const String defaultLanguage = 'en';
+  static const String defaultTheme = 'light';
 }
