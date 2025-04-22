@@ -1,6 +1,24 @@
 # Flutter JayJay Starter
 
+[![Flutter](https://img.shields.io/badge/Flutter-3.19.0-blue.svg)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.3.0-blue.svg)](https://dart.dev)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/yourusername/flutter-jayjay-starter.svg?style=social)](https://github.com/yourusername/flutter-jayjay-starter)
+[![Forks](https://img.shields.io/github/forks/yourusername/flutter-jayjay-starter.svg?style=social)](https://github.com/yourusername/flutter-jayjay-starter)
+
 A powerful Flutter application starter template with premium features, in-app purchases, and ad integration.
+
+## Keywords
+- Flutter Template
+- Flutter Starter Kit
+- Flutter Boilerplate
+- Flutter Premium App
+- Flutter In-App Purchase
+- Flutter AdMob
+- Flutter Local Database
+- Flutter Multi-language
+- Flutter Theme
+- Flutter Architecture
 
 Copyright (c) 2024 JayJay Starter
 

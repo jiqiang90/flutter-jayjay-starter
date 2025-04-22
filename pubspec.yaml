@@ -1,7 +1,20 @@
-name: jayjay_starter
-description: A new Flutter project.
+name: flutter_jayjay_starter
+description: A powerful Flutter application starter template with premium features, in-app purchases, and ad integration.
+version: 0.0.1
 publish_to: 'none'
-version: 1.0.0+1
+
+keywords:
+  - flutter
+  - template
+  - starter
+  - boilerplate
+  - premium
+  - in-app-purchase
+  - admob
+  - database
+  - multi-language
+  - theme
+  - architecture
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
