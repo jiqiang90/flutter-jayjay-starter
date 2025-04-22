@@ -4,6 +4,8 @@ A powerful Flutter application starter template with premium features, in-app pu
 
 Copyright (c) 2024 JayJay Starter
 
+<img src="assets/example.png" alt="Alt text" width="300"/>
+
 ## Features
 
 - 🎨 Beautiful and modern UI
