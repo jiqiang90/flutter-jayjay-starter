@@ -34,15 +34,15 @@ class AppConfig {
     'com.example.jayjay.remove_ads',
   ];
 
-  // 广告配置
-  static const int adInterval = 3; // 广告显示间隔（分钟）
+  // Ad configuration
+  static const int adInterval = 3; // Ad display interval (minutes)
 
-  // 服务限制配置
+  // Service limits configuration
   static const int maxRequestsPerDay = 10;
-  static const int maxStorageMB = 100; // 最大存储空间（MB）
-  static const int maxHistoryItems = 50; // 最大历史记录数量
+  static const int maxStorageMB = 100; // Maximum storage space (MB)
+  static const int maxHistoryItems = 50; // Maximum history items
 
-  // 付费功能配置
+  // Premium features configuration
   static const List<String> premiumFeatureKeys = [
     'featureNoAds',
     'featureUnlimitedRequests',
@@ -51,12 +51,12 @@ class AppConfig {
     'featureAdvancedFeatures',
   ];
 
-  // 价格配置
+  // Pricing configuration
   static const double monthlyPrice = 9.99;
   static const double yearlyPrice = 99.99;
   static const double lifetimePrice = 199.99;
 
-  // 应用内购买商品 ID
+  // In-App Purchase product IDs
   static const String premiumMonthlyId = 'com.jayjay.premium.monthly';
   static const String premiumYearlyId = 'com.jayjay.premium.yearly';
 
