@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/yourusername/flutter-jayjay-starter.svg?style=social)](https://github.com/yourusername/flutter-jayjay-starter)
 [![Forks](https://img.shields.io/github/forks/yourusername/flutter-jayjay-starter.svg?style=social)](https://github.com/yourusername/flutter-jayjay-starter)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/jiqiang90)
 
 A powerful Flutter application starter template with premium features, in-app purchases, and ad integration.
 
@@ -20,7 +21,20 @@ A powerful Flutter application starter template with premium features, in-app pu
 - Flutter Theme
 - Flutter Architecture
 
+## Support the Project
+
+If you find this project helpful, consider supporting it:
+
+### Buy Me a Coffee
+[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/jiqiang90)
+
+### Crypto Donations
+- ERC20 Address: `0xd1Cc86b76Cd644c7aBbf970A007BC844EB162B9C`
+
 Copyright (c) 2024 JayJay Starter
+
+
+## Example
 
 <img src="assets/example.png" alt="Alt text" width="300"/>
 
