@@ -4,6 +4,7 @@ import 'package:jayjay_starter/config/app_config.dart';
 import 'package:jayjay_starter/services/core/service_factory.dart';
 import 'package:jayjay_starter/services/theme/theme_service.dart';
 import 'package:jayjay_starter/services/language/language_service.dart';
+import 'package:jayjay_starter/services/icloud/icloud_service.dart';
 import 'package:jayjay_starter/l10n/app_localizations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _isPremium = false;
   DateTime? _expireDate;
   bool _isSyncing = false;
+  final _iCloudService = ICloudService();
 
   @override
   void initState() {
@@ -52,18 +54,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
 
     try {
+      final isAvailable = await _iCloudService.isICloudAvailable();
+      if (!isAvailable) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppLocalizations.of(context)!.iCloudNotAvailable)),
+          );
+        }
+        return;
+      }
+
       final appDir = await getApplicationDocumentsDirectory();
       final dbFile = File('${appDir.path}/app.db');
       
       if (await dbFile.exists()) {
-        final prefs = await SharedPreferences.getInstance();
-        final dbBytes = await dbFile.readAsBytes();
-        final dbBase64 = base64Encode(dbBytes);
-        await prefs.setString('icloud_db_backup', dbBase64);
+        final success = await _iCloudService.syncToICloud(dbFile.path);
         
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(AppLocalizations.of(context)!.syncSuccess)),
+            SnackBar(
+              content: Text(
+                success
+                    ? AppLocalizations.of(context)!.syncSuccess
+                    : AppLocalizations.of(context)!.syncFailed
+              ),
+            ),
           );
         }
       }
@@ -88,20 +103,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final dbBase64 = prefs.getString('icloud_db_backup');
-      
-      if (dbBase64 != null) {
-        final appDir = await getApplicationDocumentsDirectory();
-        final dbFile = File('${appDir.path}/app.db');
-        final dbBytes = base64Decode(dbBase64);
-        await dbFile.writeAsBytes(dbBytes);
-        
+      final isAvailable = await _iCloudService.isICloudAvailable();
+      if (!isAvailable) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(AppLocalizations.of(context)!.restoreSuccess)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.iCloudNotAvailable)),
           );
         }
+        return;
+      }
+
+      final appDir = await getApplicationDocumentsDirectory();
+      final dbFile = File('${appDir.path}/app.db');
+      
+      final success = await _iCloudService.restoreFromICloud(dbFile.path);
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              success
+                  ? AppLocalizations.of(context)!.restoreSuccess
+                  : AppLocalizations.of(context)!.restoreFailed
+            ),
+          ),
+        );
       }
     } catch (e) {
       if (mounted) {
