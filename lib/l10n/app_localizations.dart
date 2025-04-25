@@ -548,7 +548,7 @@ abstract class AppLocalizations {
   /// No description provided for @restoreSuccess.
   ///
   /// In en, this message translates to:
-  /// **'Restore Success'**
+  /// **'Successfully restored from iCloud'**
   String get restoreSuccess;
 
   /// No description provided for @restoreSuccessMessage.
@@ -560,7 +560,7 @@ abstract class AppLocalizations {
   /// No description provided for @restoreFailed.
   ///
   /// In en, this message translates to:
-  /// **'Restore Failed'**
+  /// **'Failed to restore from iCloud'**
   String get restoreFailed;
 
   /// No description provided for @restoreFailedMessage.
@@ -724,6 +724,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Free user limit reached'**
   String get premiumLimitReached;
+
+  /// No description provided for @iCloudSync.
+  ///
+  /// In en, this message translates to:
+  /// **'iCloud Sync'**
+  String get iCloudSync;
+
+  /// No description provided for @iCloudSyncDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync your data to iCloud or restore from iCloud'**
+  String get iCloudSyncDescription;
+
+  /// No description provided for @syncToICloud.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync to iCloud'**
+  String get syncToICloud;
+
+  /// No description provided for @restoreFromICloud.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore from iCloud'**
+  String get restoreFromICloud;
+
+  /// No description provided for @syncSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully synced to iCloud'**
+  String get syncSuccess;
+
+  /// No description provided for @syncFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to sync to iCloud'**
+  String get syncFailed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

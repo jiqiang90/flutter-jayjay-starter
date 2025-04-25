@@ -5,6 +5,10 @@ import 'package:jayjay_starter/services/core/service_factory.dart';
 import 'package:jayjay_starter/services/theme/theme_service.dart';
 import 'package:jayjay_starter/services/language/language_service.dart';
 import 'package:jayjay_starter/l10n/app_localizations.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -17,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _notifications = true;
   bool _isPremium = false;
   DateTime? _expireDate;
+  bool _isSyncing = false;
 
   @override
   void initState() {
@@ -37,6 +42,112 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _formatExpireDate() {
     if (_expireDate == null) return '';
     return '${_expireDate!.year}-${_expireDate!.month.toString().padLeft(2, '0')}-${_expireDate!.day.toString().padLeft(2, '0')}';
+  }
+
+  Future<void> _syncToICloud() async {
+    if (_isSyncing) return;
+    
+    setState(() {
+      _isSyncing = true;
+    });
+
+    try {
+      final appDir = await getApplicationDocumentsDirectory();
+      final dbFile = File('${appDir.path}/app.db');
+      
+      if (await dbFile.exists()) {
+        final prefs = await SharedPreferences.getInstance();
+        final dbBytes = await dbFile.readAsBytes();
+        final dbBase64 = base64Encode(dbBytes);
+        await prefs.setString('icloud_db_backup', dbBase64);
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppLocalizations.of(context)!.syncSuccess)),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.syncFailed)),
+        );
+      }
+    } finally {
+      setState(() {
+        _isSyncing = false;
+      });
+    }
+  }
+
+  Future<void> _restoreFromICloud() async {
+    if (_isSyncing) return;
+    
+    setState(() {
+      _isSyncing = true;
+    });
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final dbBase64 = prefs.getString('icloud_db_backup');
+      
+      if (dbBase64 != null) {
+        final appDir = await getApplicationDocumentsDirectory();
+        final dbFile = File('${appDir.path}/app.db');
+        final dbBytes = base64Decode(dbBase64);
+        await dbFile.writeAsBytes(dbBytes);
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppLocalizations.of(context)!.restoreSuccess)),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.restoreFailed)),
+        );
+      }
+    } finally {
+      setState(() {
+        _isSyncing = false;
+      });
+    }
+  }
+
+  void _showICloudDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.iCloudSync),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (_isSyncing)
+              const CircularProgressIndicator()
+            else ...[
+              ListTile(
+                leading: const Icon(Icons.cloud_upload),
+                title: Text(AppLocalizations.of(context)!.syncToICloud),
+                onTap: () {
+                  _syncToICloud();
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.cloud_download),
+                title: Text(AppLocalizations.of(context)!.restoreFromICloud),
+                onTap: () {
+                  _restoreFromICloud();
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 
   void _showThemeDialog(BuildContext context) {
@@ -252,6 +363,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: Text(
                 '${AppLocalizations.of(context)!.version} ${AppConfig.version}'),
             onTap: () => _showAboutDialog(context),
+          ),
+          ListTile(
+            leading: const Icon(Icons.cloud),
+            title: Text(AppLocalizations.of(context)!.iCloudSync),
+            subtitle: Text(
+              AppLocalizations.of(context)!.iCloudSyncDescription,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodySmall?.color,
+              ),
+            ),
+            onTap: () => _showICloudDialog(context),
           ),
         ],
       ),
