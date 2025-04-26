@@ -242,13 +242,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get purchaseServiceError => 'Unable to connect to purchase service';
 
   @override
-  String get restoreSuccess => 'Restore Success';
+  String get restoreSuccess => '成功从 iCloud 恢复';
 
   @override
   String get restoreSuccessMessage => 'Your purchases have been restored.';
 
   @override
-  String get restoreFailed => 'Restore Failed';
+  String get restoreFailed => '从 iCloud 恢复失败';
 
   @override
   String get restoreFailedMessage => 'Failed to restore purchases';
@@ -336,4 +336,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get premiumLimitReached => '已达到免费用户使用限制';
+
+  @override
+  String get iCloudSync => 'iCloud 同步';
+
+  @override
+  String get iCloudSyncDescription => '将数据同步到 iCloud 或从 iCloud 恢复';
+
+  @override
+  String get syncToICloud => '同步到 iCloud';
+
+  @override
+  String get restoreFromICloud => '从 iCloud 恢复';
+
+  @override
+  String get syncSuccess => '成功同步到 iCloud';
+
+  @override
+  String get syncFailed => '同步到 iCloud 失败';
 }

@@ -242,13 +242,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get purchaseServiceError => 'Unable to connect to purchase service';
 
   @override
-  String get restoreSuccess => 'Restore Success';
+  String get restoreSuccess => 'Successfully restored from iCloud';
 
   @override
   String get restoreSuccessMessage => 'Your purchases have been restored.';
 
   @override
-  String get restoreFailed => 'Restore Failed';
+  String get restoreFailed => 'Failed to restore from iCloud';
 
   @override
   String get restoreFailedMessage => 'Failed to restore purchases';
@@ -336,4 +336,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get premiumLimitReached => 'Free user limit reached';
+
+  @override
+  String get iCloudSync => 'iCloud Sync';
+
+  @override
+  String get iCloudSyncDescription => 'Sync your data to iCloud or restore from iCloud';
+
+  @override
+  String get syncToICloud => 'Sync to iCloud';
+
+  @override
+  String get restoreFromICloud => 'Restore from iCloud';
+
+  @override
+  String get syncSuccess => 'Successfully synced to iCloud';
+
+  @override
+  String get syncFailed => 'Failed to sync to iCloud';
 }

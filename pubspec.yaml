@@ -1,4 +1,4 @@
-name: flutter_jayjay_starter
+name: jayjay_starter
 description: A powerful Flutter application starter template with premium features, in-app purchases, and ad integration.
 version: 0.0.1
 publish_to: 'none'
@@ -31,6 +31,7 @@ dependencies:
   in_app_purchase: ^3.1.13
   sqflite: ^2.3.0
   path: ^1.8.3
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:
